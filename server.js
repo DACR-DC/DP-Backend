@@ -44,6 +44,11 @@ app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(upload.any());
 
+
+app.get('/', (req, res) => {
+  res.send('Backend...');
+});
+
 app.use("/api", usuarioRoutes);
 app.use("/api", prodRoutes);
 app.use("/api", zonadispRoutes);
