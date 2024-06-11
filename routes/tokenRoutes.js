@@ -15,7 +15,7 @@ router.post('/generar-token', async (req, res) => {
 router.get('/token/:tokenValor', async (req, res) => {
   const { tokenValor } = req.params;
   try {
-    const token = await tokenController.buscarToken(tokenValor); 
+    const token = await tokenController.buscarToken(tokenValor);
     if (!token) {
       return res.status(404).json({ error: 'Token no encontrado' });
     }
@@ -30,7 +30,7 @@ router.put('/actualizar-correo/:tokenValor', async (req, res) => {
   const { tokenValor } = req.params;
   const { nuevoCorreo } = req.body;
   try {
-    const token = await tokenController.buscarToken(tokenValor); 
+    const token = await tokenController.buscarToken(tokenValor);
     if (!token) {
       return res.status(404).json({ error: 'Token no encontrado' });
     }

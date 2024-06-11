@@ -5,18 +5,18 @@ const bcrypt = require('bcrypt');
 
 exports.registrarUsuario = async (req, res) => {
   console.log('Solicitud recibida');
-  const { correo, nombre, contraseña, token,admin } = req.body;
+  const { correo, nombre, contraseña, token, admin } = req.body;
 
   try {
-   
+
     const hashedContraseña = await bcrypt.hash(contraseña, 10);
 
     const nuevoUsuario = new Usuario({
       correo,
       nombre,
-      contraseña: hashedContraseña, 
-      token, 
-      admin, 
+      contraseña: hashedContraseña,
+      token,
+      admin,
     });
 
     await nuevoUsuario.save();
@@ -38,17 +38,17 @@ exports.iniciarSesion = async (req, res) => {
 
   try {
     console.log('Solicitud de inicio de sesión recibida');
-    
+
     const usuario = await Usuario.findOne({ correo });
 
     if (usuario) {
       console.log('Usuario encontrado:', usuario);
 
       const contraseñaValida = await bcrypt.compare(contraseña, usuario.contraseña);
-     
+
       if (contraseñaValida) {
         console.log('Contraseña válida. Inicio de sesión exitoso');
-        res.status(200).json({ success: true, mensaje: 'Inicio de sesión exitoso', nombre:usuario.nombre, admin: usuario.admin });
+        res.status(200).json({ success: true, mensaje: 'Inicio de sesión exitoso', nombre: usuario.nombre, admin: usuario.admin });
       } else {
         console.log('Contraseña incorrecta. Inicio de sesión fallido');
         res.status(401).json({ success: false, mensaje: 'Credenciales incorrectas' });
@@ -84,16 +84,16 @@ exports.actualizarUsuario = async (req, res) => {
     if (!usuario) {
       return res.status(404).json({ success: false, mensaje: 'Usuario no encontrado' });
     }
- 
+
     if (nombre) {
       usuario.nombre = nombre;
     }
 
     if (contraseña) {
-  
+
       usuario.contraseña = await bcrypt.hash(contraseña, 10);
     }
-    if (token){
+    if (token) {
       usuario.token = token;
     }
 
@@ -106,7 +106,7 @@ exports.actualizarUsuario = async (req, res) => {
   }
 };
 exports.eliminarUsuario = async (req, res) => {
-  const { correo } = req.params; 
+  const { correo } = req.params;
 
   try {
     const resultado = await Usuario.deleteOne({ correo });

@@ -14,7 +14,7 @@ exports.crearProducto = async (req, res) => {
 exports.obtenerProductos = async (req, res) => {
   try {
     console.log('Intentando obtener productos...');
-    
+
     const productos = await Producto.find();
     console.log('Productos obtenidos:', productos);
     res.json(productos);
@@ -27,18 +27,18 @@ exports.obtenerProductos = async (req, res) => {
 
 exports.eliminarProducto = async (req, res) => {
   try {
-      const { id } = req.params;
-      const ordenExistente = await Producto.findById(id);
+    const { id } = req.params;
+    const ordenExistente = await Producto.findById(id);
 
-      if (!ordenExistente) {
-          return res.status(404).json({ message: 'Producto no encontrado' });
-      }
-      await Producto.deleteOne({ _id: id });
+    if (!ordenExistente) {
+      return res.status(404).json({ message: 'Producto no encontrado' });
+    }
+    await Producto.deleteOne({ _id: id });
 
-      res.status(200).json({ message: 'Producto Eliminado' });
+    res.status(200).json({ message: 'Producto Eliminado' });
   } catch (error) {
-      console.error('Error al eliminar el producto:', error);
-      res.status(500).json({ message: 'Ocurrió un error al eliminar el producto' });
+    console.error('Error al eliminar el producto:', error);
+    res.status(500).json({ message: 'Ocurrió un error al eliminar el producto' });
   }
 };
 

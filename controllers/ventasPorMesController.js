@@ -2,7 +2,7 @@ const VentasPorMes = require("../models/ventasPorMesModel");
 
 exports.registrarVentasPorMes = async (req, res) => {
   try {
-    const {  mes, totalVendida, cantidadVendida, ultimaVenta } = req.body;
+    const { mes, totalVendida, cantidadVendida, ultimaVenta } = req.body;
 
     const nuevaVentaPorMes = new VentasPorMes({ mes, totalVendida, cantidadVendida, ultimaVenta });
     await nuevaVentaPorMes.save();

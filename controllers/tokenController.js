@@ -15,13 +15,13 @@ const generarToken = async (req, res) => {
   try {
     const nuevoToken = new Token({
       token,
-      correo: req.body.correo || "", 
+      correo: req.body.correo || "",
     });
     await nuevoToken.save();
 
     setTimeout(async () => {
-      await eliminarToken(nuevoToken._id); 
-    }, 5 * 60 * 1000); 
+      await eliminarToken(nuevoToken._id);
+    }, 5 * 60 * 1000);
 
     return token;
   } catch (error) {

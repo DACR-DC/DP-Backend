@@ -7,15 +7,15 @@ const tokenSchema = new mongoose.Schema({
   },
   correo: {
     type: String,
-    default: "", 
+    default: "",
   },
   vencimiento: {
     type: Date,
-    default: Date.now, 
-    expires: 300, 
+    default: Date.now,
+    expires: 300,
   },
 });
 
-const Token= mongoose.model('Token', tokenSchema);
+const Token = mongoose.model('Token', tokenSchema);
 
-module.exports=Token;
+module.exports = Token;

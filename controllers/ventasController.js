@@ -3,16 +3,16 @@ const Producto = require("../models/prodModel");
 
 exports.registrarVentaProducto = async (req, res) => {
   try {
-    const { productoId, cantidadVendida,totalVendida } = req.body;
+    const { productoId, cantidadVendida, totalVendida } = req.body;
 
     let ventaProducto = await VentaProducto.findOne({ productoId });
 
     if (!ventaProducto) {
-      ventaProducto = new VentaProducto({ productoId, cantidadVendida,totalVendida });
+      ventaProducto = new VentaProducto({ productoId, cantidadVendida, totalVendida });
     } else {
       ventaProducto.cantidadVendida += cantidadVendida;
       ventaProducto.fechaUltimaVenta = Date.now();
-      ventaProducto.totalVendida=totalVendida;
+      ventaProducto.totalVendida = totalVendida;
     }
 
     if (!ventaProducto.fechaPrimeraVenta) {
@@ -77,9 +77,9 @@ exports.totalVentas = async (req, res) => {
       }
     });
 
-    res.status(200).json({ 
+    res.status(200).json({
       totalVentas: totalVendido,
-      totalCantidadVendido: cantidadVendida ,
+      totalCantidadVendido: cantidadVendida,
       ultimaVenta: ultimaVenta
     });
   } catch (error) {

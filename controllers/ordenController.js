@@ -67,42 +67,42 @@ exports.crearOrden = async (req, res) => {
     //FIN GUARDAR EN VENTAS
 
     //ESTO ES PARA GUARDAR EN VENTAS POR MES
-const today = new Date();
-const nombreMes = today.toLocaleString('es', { month: 'long' }).toUpperCase(); 
+    const today = new Date();
+    const nombreMes = today.toLocaleString('es', { month: 'long' }).toUpperCase();
 
 
-for (const item of carrito) {
-  const cantidadVendida = parseInt(item.opcionesVenta[0].aVender);
-  if (isNaN(cantidadVendida)) {
-    console.error("Error: La cantidad vendida no es un número válido");
-    continue;
-  }
+    for (const item of carrito) {
+      const cantidadVendida = parseInt(item.opcionesVenta[0].aVender);
+      if (isNaN(cantidadVendida)) {
+        console.error("Error: La cantidad vendida no es un número válido");
+        continue;
+      }
 
-  const precioUnitario = parseInt(item.opcionesVenta[0].precio);
-  if (isNaN(precioUnitario)) {
-    console.error("Error: El precio es inválido");
-    continue;
-  }
-  
-  const totalVendida = precioUnitario;
+      const precioUnitario = parseInt(item.opcionesVenta[0].precio);
+      if (isNaN(precioUnitario)) {
+        console.error("Error: El precio es inválido");
+        continue;
+      }
 
-  const ventasPorEsteMes = await VentasPorMes.findOne({ mes: nombreMes });
-  if (ventasPorEsteMes) {
-    ventasPorEsteMes.totalVendida += totalVendida;
-    ventasPorEsteMes.cantidadVendida += cantidadVendida;
-    ventasPorEsteMes.ultimaVenta = item.fechaUltVenta;
-    await ventasPorEsteMes.save();
-  } else {
-    const nuevaVentaPorMes = new VentasPorMes({
-      mes: nombreMes,
-      totalVendida,
-      cantidadVendida,
-      ultimaVenta: item.fechaUltVenta
-    });
-    await nuevaVentaPorMes.save();
-  }
-}
-//FIN VENTAS POR MES
+      const totalVendida = precioUnitario;
+
+      const ventasPorEsteMes = await VentasPorMes.findOne({ mes: nombreMes });
+      if (ventasPorEsteMes) {
+        ventasPorEsteMes.totalVendida += totalVendida;
+        ventasPorEsteMes.cantidadVendida += cantidadVendida;
+        ventasPorEsteMes.ultimaVenta = item.fechaUltVenta;
+        await ventasPorEsteMes.save();
+      } else {
+        const nuevaVentaPorMes = new VentasPorMes({
+          mes: nombreMes,
+          totalVendida,
+          cantidadVendida,
+          ultimaVenta: item.fechaUltVenta
+        });
+        await nuevaVentaPorMes.save();
+      }
+    }
+    //FIN VENTAS POR MES
 
     //CONTINUACION PARA CONFIRMAR TODO
     res.status(201).json(ordenGuardada);

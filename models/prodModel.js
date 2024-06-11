@@ -15,7 +15,7 @@ const prodSchema = new mongoose.Schema({
       precio: String,
     },
   ],
-  disponible:{type:Boolean, default:true}
+  disponible: { type: Boolean, default: true }
 });
 
 const Producto = mongoose.model('Producto', prodSchema);

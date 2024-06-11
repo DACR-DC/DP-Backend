@@ -21,9 +21,9 @@ const ordenSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  aDomicilio: { type: Boolean }, 
+  aDomicilio: { type: Boolean },
   recogerEnTienda: { type: Boolean },
-  zonaEntrega: { type: String } ,
+  zonaEntrega: { type: String },
   entregado: { type: Boolean, default: false },
   fechaOrden: {
     type: String,
@@ -31,7 +31,7 @@ const ordenSchema = new mongoose.Schema({
   },
   hora: {
     type: String,
-    default: () => moment().tz('America/Guatemala').format('HH:mm') 
+    default: () => moment().tz('America/Guatemala').format('HH:mm')
   }
 });
 
