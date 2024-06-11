@@ -2,14 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "./server.js",
+  "engines":{
+    "node": "18.x"
+  },
   "scripts": {
-    "start": "node server.js & react-scripts start",
-    "server": "node server.js",
-    "server-start": "cd server && npm start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
