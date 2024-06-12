@@ -24,6 +24,38 @@ exports.obtenerProductos = async (req, res) => {
   }
 };
 
+exports.obtenerProductoPorId = async (req, res) => {
+  try {
+    const { id } = req.params; 
+    console.log(`Intentando obtener producto con ID: ${id}`);
+
+    const producto = await Producto.findById(id);
+    if (!producto) {
+      return res.status(404).json({ message: 'Producto no encontrado' });
+    }
+    res.json(producto);
+  } catch (error) {
+    console.error('Error al obtener producto por ID:', error.message);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+
+exports.obtenerImagenProducto = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const producto = await Producto.findById(id);
+
+    if (!producto || !producto.imagen) {
+      return res.status(404).json({ message: 'Imagen no encontrada' });
+    }
+
+    res.json({ imagen: producto.imagen });
+  } catch (error) {
+    console.error('Error al obtener la imagen del producto:', error.message);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
 
 exports.eliminarProducto = async (req, res) => {
   try {

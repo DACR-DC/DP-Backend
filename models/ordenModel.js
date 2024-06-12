@@ -8,7 +8,7 @@ const ordenSchema = new mongoose.Schema({
     unique: true
   },
   informacionUsuario: {
-    cuiDpi: { type: String, required: true },
+    correo: { type: String, required: true },
     nombreRecibe: { type: String, required: true },
     telefono: { type: String, required: true },
     direccionOhoraRecoger: { type: String, required: true }
