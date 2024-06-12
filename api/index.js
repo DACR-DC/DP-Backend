@@ -12,6 +12,7 @@ const multer = require("multer");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/DulcePlacer_GT";
 
 app.use(
   cors({
@@ -27,7 +28,7 @@ const upload = multer({ limits: { fileSize: 100 * 1024 * 1024 } });
 
 const connectToDatabase = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/DulcePlacer_GT", {
+    await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
