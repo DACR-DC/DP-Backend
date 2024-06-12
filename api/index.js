@@ -65,3 +65,5 @@ app
     console.error("Error al iniciar el servidor:", error.message);
     process.exit(1);
   });
+
+  module.exports = app;
