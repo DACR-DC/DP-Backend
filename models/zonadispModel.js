@@ -5,8 +5,12 @@ const zonadispSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  precio: {
+    type: Number,
+    required: true,
+  },
 });
 
-const dir = mongoose.model('Direcciones', zonadispSchema);
+const Dir = mongoose.model('Direcciones', zonadispSchema);
 
-module.exports = dir;
+module.exports = Dir;

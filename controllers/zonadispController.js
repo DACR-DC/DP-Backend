@@ -3,12 +3,12 @@ const ZonaDisponible = require('../models/zonadispModel');
 
 exports.crearZona = async (req, res) => {
   try {
-    const { zonadisponible } = req.body;
-    const nuevaZonaDisponible = new ZonaDisponible({ zonadisponible });
+    const { zonadisponible, precio } = req.body;
+    const nuevaZonaDisponible = new ZonaDisponible({ zonadisponible, precio });
     const savedZonaDisponible = await nuevaZonaDisponible.save();
     res.status(201).json(savedZonaDisponible);
   } catch (error) {
-    console.error('Error al crear la zona :', error);
+    console.error('Error al crear la zona:', error);
     res.status(500).json({ message: 'Ocurrió un error al crear la zona disponible' });
   }
 };
