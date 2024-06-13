@@ -90,3 +90,25 @@ exports.totalVentas = async (req, res) => {
     res.status(500).json({ message: "Error del servidor" });
   }
 };
+
+
+
+exports.obtenerTodasLasVentas = async (req, res) => {
+  try {
+    const ventas = await VentaProducto.find();
+    res.status(200).json(ventas);
+  } catch (error) {
+    console.error("Error al obtener todas las ventas:", error);
+    res.status(500).json({ message: "Error del servidor" });
+  }
+};
+
+exports.eliminarVentas = async (req, res) => {
+  try {
+    await VentaProducto.deleteMany({}); 
+    res.status(200).json({ message: "Todas las ventas han sido eliminadas correctamente" });
+  } catch (error) {
+    console.error("Error al eliminar todas las ventas:", error);
+    res.status(500).json({ message: "Error  al eliminar todas las ventas" });
+  }
+};
