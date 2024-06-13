@@ -12,6 +12,7 @@ const prodSchema = new mongoose.Schema({
   opcionesVenta: [
     {
       aVender: String,
+      cantidad:Number,
       precio: String,
     },
   ],

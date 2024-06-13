@@ -32,7 +32,10 @@ exports.crearOrden = async (req, res) => {
 
     //ESTO ES PARA GUARDAR EN VENTAS
     for (const item of carrito) {
-      const cantidadVendida = parseInt(item.opcionesVenta[0].aVender);
+      const cantidadVendida = parseInt(item.opcionesVenta[0].cantidad)-parseInt(item.opcionesVenta[0].cantidad)+1;
+      
+      console.log(item);
+      console.log(cantidadVendida);
       if (isNaN(cantidadVendida)) {
         console.error("Error: La cantidad vendida no es un número válido");
         continue;
@@ -57,7 +60,7 @@ exports.crearOrden = async (req, res) => {
           fechaUltimaVenta: fechaOrden,
         });
       } else {
-        ventaProducto.cantidadVendida += cantidadVendida;
+        ventaProducto.cantidadVendida += 1;
         ventaProducto.totalVendida += totalVendida;
         ventaProducto.fechaUltimaVenta = fechaOrden;
       }
@@ -72,7 +75,9 @@ exports.crearOrden = async (req, res) => {
 
 
     for (const item of carrito) {
-      const cantidadVendida = parseInt(item.opcionesVenta[0].aVender);
+      const cantidadVendida = parseInt(item.opcionesVenta[0].cantidad);
+      
+      console.log(cantidadVendida);
       if (isNaN(cantidadVendida)) {
         console.error("Error: La cantidad vendida no es un número válido");
         continue;
@@ -89,7 +94,7 @@ exports.crearOrden = async (req, res) => {
       const ventasPorEsteMes = await VentasPorMes.findOne({ mes: nombreMes });
       if (ventasPorEsteMes) {
         ventasPorEsteMes.totalVendida += totalVendida;
-        ventasPorEsteMes.cantidadVendida += cantidadVendida;
+        ventasPorEsteMes.cantidadVendida += 1;
         ventasPorEsteMes.ultimaVenta = item.fechaUltVenta;
         await ventasPorEsteMes.save();
       } else {
