@@ -16,7 +16,7 @@ exports.obtenerProductos = async (req, res) => {
     console.log('Intentando obtener productos...');
 
     const productos = await Producto.find();
-    console.log('Productos obtenidos:', productos);
+    // console.log('Productos obtenidos:', productos);
     res.json(productos);
   } catch (error) {
     console.error('Error al obtener productos:', error.message);

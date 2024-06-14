@@ -106,10 +106,10 @@ exports.actualizarUsuario = async (req, res) => {
   }
 };
 exports.eliminarUsuario = async (req, res) => {
-  const { correo } = req.params;
+  const { id } = req.params;
 
   try {
-    const resultado = await Usuario.deleteOne({ correo });
+    const resultado = await Usuario.deleteOne({ _id: id });
 
     if (resultado.deletedCount === 0) {
       return res.status(404).json({ success: false, mensaje: 'Usuario no encontrado' });
@@ -121,6 +121,7 @@ exports.eliminarUsuario = async (req, res) => {
     res.status(500).json({ success: false, mensaje: 'Error al eliminar el usuario', error: error.message });
   }
 };
+
 /*
 exports.guardarProducto = async (req, res) => {
   console.log('Solicitud recibida');

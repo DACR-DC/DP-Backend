@@ -6,11 +6,15 @@ exports.registrarVentaProducto = async (req, res) => {
     const { productoId, cantidadVendida, totalVendida } = req.body;
 
     let ventaProducto = await VentaProducto.findOne({ productoId });
-
+    console.log(ventaProducto);
     if (!ventaProducto) {
-      ventaProducto = new VentaProducto({ productoId, cantidadVendida, totalVendida });
+      ventaProducto = new VentaProducto({
+        productoId,
+        cantidadVendida,
+        totalVendida,
+      });
     } else {
-      ventaProducto.cantidadVendida += cantidadVendida;
+      ventaProducto.cantidadVendida  += 1;
       ventaProducto.fechaUltimaVenta = Date.now();
       ventaProducto.totalVendida = totalVendida;
     }
@@ -61,7 +65,6 @@ exports.menosVendido = async (req, res) => {
   }
 };
 
-
 exports.totalVentas = async (req, res) => {
   try {
     const ventas = await VentaProducto.find();
@@ -80,10 +83,32 @@ exports.totalVentas = async (req, res) => {
     res.status(200).json({
       totalVentas: totalVendido,
       totalCantidadVendido: cantidadVendida,
-      ultimaVenta: ultimaVenta
+      ultimaVenta: ultimaVenta,
     });
   } catch (error) {
     console.error("Error al obtener el total de ventas:", error);
     res.status(500).json({ message: "Error del servidor" });
+  }
+};
+
+
+
+exports.obtenerTodasLasVentas = async (req, res) => {
+  try {
+    const ventas = await VentaProducto.find();
+    res.status(200).json(ventas);
+  } catch (error) {
+    console.error("Error al obtener todas las ventas:", error);
+    res.status(500).json({ message: "Error del servidor" });
+  }
+};
+
+exports.eliminarVentas = async (req, res) => {
+  try {
+    await VentaProducto.deleteMany({}); 
+    res.status(200).json({ message: "Todas las ventas han sido eliminadas correctamente" });
+  } catch (error) {
+    console.error("Error al eliminar todas las ventas:", error);
+    res.status(500).json({ message: "Error  al eliminar todas las ventas" });
   }
 };

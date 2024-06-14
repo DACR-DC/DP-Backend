@@ -24,3 +24,14 @@ exports.obtenerVentasPorMes = async (req, res) => {
     res.status(500).json({ message: "Error del servidor" });
   }
 };
+
+
+exports.eliminarVentasPorMes = async (req, res) => {
+  try {
+    await VentasPorMes.deleteMany({});
+    res.status(200).json({ message: "Todas las ventas por mes han sido eliminadas correctamente" });
+  } catch (error) {
+    console.error("Error al eliminar todas las ventas por mes:", error);
+    res.status(500).json({ message: "Error del servidor" });
+  }
+};
