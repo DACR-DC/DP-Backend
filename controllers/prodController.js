@@ -1,15 +1,27 @@
 const Producto = require('../models/prodModel');
 
-
 exports.crearProducto = async (req, res) => {
   try {
-    const nuevoProducto = new Producto(req.body);
+    const { nombre, descripcion, deTemporada, opcionesVenta } = req.body;
+    const imagen = req.body.imagen; 
+
+    const nuevoProducto = new Producto({
+      nombre,
+      imagen,
+      descripcion,
+      deTemporada,
+      opcionesVenta,
+    });
+
     const productoGuardado = await nuevoProducto.save();
-    res.json(productoGuardado);
+    res.status(200).json(productoGuardado);
   } catch (error) {
+    console.error('Error al guardar el producto:', error);
     res.status(400).json({ error: error.message });
   }
 };
+
+
 
 exports.obtenerProductos = async (req, res) => {
   try {

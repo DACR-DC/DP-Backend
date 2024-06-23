@@ -13,10 +13,10 @@ const multer = require("multer");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/DulcePlacer_GT";
-
+//const MONGODB_URI = process.env.MONGODB_URI;
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://dp-frontend-ayzo.vercel.app", "https://dp-backend-vnok.onrender.com"],
+    origin: ["http://localhost:3000", "https://dp-frontend-ayzo.vercel.app"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
