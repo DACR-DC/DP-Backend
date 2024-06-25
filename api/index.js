@@ -16,7 +16,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/DulceP
 //const MONGODB_URI = process.env.MONGODB_URI;
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://dp-frontend-ayzo.vercel.app"],
+    origin: ["http://localhost:3000", "https://dp-frontend-ayzo.vercel.app", "https://www.dulceplacer.cafe"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
